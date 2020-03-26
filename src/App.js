@@ -1,26 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Start from "./Screen/Start";
+import Question from "./Screen/Question";
+import Result from "./Screen/Result";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      start: false,
+      resCom: false,
+      correct:''
+    };
+  }
+
+  start = () => {
+    this.setState({
+      start: true
+    });
+  };
+  result = () => {
+    this.setState({
+      resCom: true
+    });
+  };
+  scoreUpdate=(updatedScore,correct)=>{
+    this.setState({
+      updatedScore,
+      
+    })
+  }
+  correctUpdate=(correct)=>{
+    this.setState({
+      correct
+
+    })
+  }
+  resComponent=()=>{
+    this.setState({
+      resCom:true
+    })
+  }
+  render() {
+    const { start, resCom,updatedScore ,correct} = this.state;
+    console.log(updatedScore)
+
+    return (
+      <div className="App">
+        {start ?(
+          <div>
+           
+          
+ {resCom?<Result  correctAns={correct} final={updatedScore}/>:<Question res={this.resComponent} correctUpdate={this.correctUpdate} scoreUpdate={this.scoreUpdate} change={this.result} />}
+          </div>
+        ) : (
+          <Start change={this.start} />
+        )}
+
+   
+      </div>
+    );
+  }
 }
 
 export default App;
