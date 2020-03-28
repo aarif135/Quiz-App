@@ -119,7 +119,7 @@ class Question extends Component {
                 <li>
                   <input
                     type="radio"
-                    value={item.incorrect_answers[2]}
+                    value={item.incorrect_answers[1]}
                     onChange={this.update}
                     name={index}
                   />{" "}
